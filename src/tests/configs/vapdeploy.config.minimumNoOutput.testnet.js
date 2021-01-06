@@ -1,12 +1,8 @@
-const sign = require('ethjs-signer').sign;
-const SignerProvider = require('ethjs-provider-signer');
+const sign = require('vapjs-signer').sign;
+const SignerProvider = require('vapjs-provider-signer');
 
 module.exports = () => ({
   entry: [],
-  output: {
-    path: './',
-    filename: 'environments.json',
-  },
   module: {
     environment: {
       name: 'ropsten',

@@ -1,8 +1,11 @@
-const sign = require('ethjs-signer').sign;
-const SignerProvider = require('ethjs-provider-signer');
+const sign = require('vapjs-signer').sign;
+const SignerProvider = require('vapjs-provider-signer');
 
-module.exports = (options) => ({
-  entry: 'contracts',
+module.exports = () => ({
+  entry: [
+    'environments.json',
+    'contracts',
+  ],
   output: {
     path: './',
     filename: 'environments.json',
@@ -13,6 +16,7 @@ module.exports = (options) => ({
     ],
     loaders: [
       { test: /\.(sol)$/, loader: '../loaders/solc.js', optimize: 1 },
+      { test: /\.(json)$/, loader: '../loaders/solc-json.js' },
     ],
     environment: {
       name: 'ropsten',
@@ -35,7 +39,4 @@ module.exports = (options) => ({
       });
     },
   },
-  plugins: [
-    new options.plugins.JSONMinifier(),
-  ],
 });

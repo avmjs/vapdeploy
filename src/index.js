@@ -16,12 +16,12 @@ const transformContracts = lib.transformContracts;
 /**
  * Intakes config object, deploys contracts, outputs result as string for file writting.
  *
- * @method ethdeploy
- * @param {Object|Function} config the ethdeploy config object or method
+ * @method vapdeploy
+ * @param {Object|Function} config the vapdeploy config object or method
  * @param {Function} callbackInput the final callback that returns the output
  * @callback {Object} outputObject returns the final config object, and contracts output
  */
-module.exports = function ethdeploy(config, callbackInput) { // eslint-disable-line
+module.exports = function vapdeploy(config, callbackInput) { // eslint-disable-line
   // this is the initial deployed contracts store
   var deployedContracts = {}; // eslint-disable-line
   const callback = callbackInput || function cb() {};

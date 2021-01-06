@@ -1,26 +1,26 @@
 {
-  "name": "ethdeploy-raw-environment-loader",
+  "name": "vapdeploy-raw-environment-loader",
   "version": "1.0.0",
-  "description": "A raw environment loader for ethdeploy.",
+  "description": "A raw environment loader for vapdeploy.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/SilentCicero/ethdeploy.git"
+    "url": "git+ssh://git@github.com/vapjs/vapdeploy.git"
   },
   "keywords": [
     "solc",
     "loader",
-    "ethdeploy",
-    "ethereum",
+    "vapdeploy",
+    "vapory",
     "solidity"
   ],
   "author": "Nick Dodson",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/SilentCicero/ethdeploy-raw-solc-loader/issues"
+    "url": "https://github.com/vapjs/vapdeploy-raw-solc-loader/issues"
   },
-  "homepage": "https://github.com/SilentCicero/ethdeploy-raw-solc-loader#readme"
+  "homepage": "https://github.com/vapjs/vapdeploy-raw-solc-loader#readme"
 }

@@ -1,8 +1,8 @@
 const deepAssign = require('deep-assign');
 const deepEqual = require('deep-equal');
-const Eth = require('ethjs-query');
-const EthUtils = require('ethjs-util');
-const EthContract = require('ethjs-contract');
+const Vap = require('vapjs-query');
+const VapUtils = require('vapjs-util');
+const VapContract = require('vapjs-contract');
 const stripHexPrefix = require('strip-hex-prefix');
 const cloneDeep = require('clone-deep');
 const utils = require('../utils/index.js');
@@ -17,7 +17,7 @@ const getInputSources = utils.getInputSources;
  *
  * @method transformTxObject
  * @param {Object} txObject the input default tx object
- * @param {Array} accounts the accounts from Ethereum RPC
+ * @param {Array} accounts the accounts from Vapory RPC
  * @return {Object} output the transformed tx object
  */
 function transformTxObject(txObject, accounts) {
@@ -42,7 +42,7 @@ function loadEnvironment(environment, callback) {
 
   var transformedEnvironment = cloneDeep(environment); // eslint-disable-line
 
-  const query = new Eth(transformedEnvironment.provider);
+  const query = new Vap(transformedEnvironment.provider);
   query.net_version((versionError, result) => { // eslint-disable-line
     if (versionError) { return callback(error(`${errorMsgBase}error attempting to connect to node environment '${transformedEnvironment.name}': ${versionError}`), null); }
 
@@ -259,8 +259,8 @@ function buildDeployMethod(baseContracts, transformedEnvironment, report) {
     const contractInputs = bnToString(Array.prototype.slice.call(contractNewArguments));
     const contractBytecode = `0x${stripHexPrefix(contractData.bytecode)}`;
     const contractABI = JSON.parse(contractData.interface);
-    const eth = new Eth(transformedEnvironment.provider);
-    const contract = new EthContract(eth);
+    const vap = new Vap(transformedEnvironment.provider);
+    const contract = new VapContract(vap);
     const contractFactory = contract(contractABI, contractBytecode, defaultTxObject);
 
     // trim callback from inputs, not args
@@ -280,8 +280,8 @@ function buildDeployMethod(baseContracts, transformedEnvironment, report) {
     }
 
     // check contract has transaction object, either default or specified
-    if (!EthUtils.isHexString(transactionObject.from, 20)) {
-      const invalidFromAccount = `Attempting to deploy contract '${contractData.name}' with an invalid 'from' account specified. The 'from' account must be a valid 20 byte hex prefixed Ethereum address, got value '${transactionObject.from}'. Please specify a defaultTxObject in the module.environment.defaultTxObject (i.e. 'defaultTxObject: { from: 0 }') object or in the in the deploy method.`;
+    if (!VapUtils.isHexString(transactionObject.from, 20)) {
+      const invalidFromAccount = `Attempting to deploy contract '${contractData.name}' with an invalid 'from' account specified. The 'from' account must be a valid 20 byte hex prefixed Vapory address, got value '${transactionObject.from}'. Please specify a defaultTxObject in the module.environment.defaultTxObject (i.e. 'defaultTxObject: { from: 0 }') object or in the in the deploy method.`;
 
       return Promise.reject(error(invalidFromAccount));
     }
@@ -309,7 +309,7 @@ function buildDeployMethod(baseContracts, transformedEnvironment, report) {
       })) {
         resolveAndReport(contractFactory.at(baseContract.address));
       } else {
-        deployContract(eth, contractFactory, contractInputs, (deployError, instance) => {
+        deployContract(vap, contractFactory, contractInputs, (deployError, instance) => {
           if (deployError) {
             console.log(error(`while deploying contract '${contractData.name}': `, JSON.stringify(deployError.value, null, 2))); // eslint-disable-line
             reject(deployError);
@@ -364,7 +364,7 @@ function entrySourceMap(entry, callback) {
   singleEntrySourceMap(entryData[0], entryData, {}, callback);
 }
 
-// critical concept methods for ethdeploy
+// critical concept methods for vapdeploy
 module.exports = {
   transformTxObject,
   processOutput,

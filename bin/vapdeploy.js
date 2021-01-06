@@ -3,7 +3,7 @@
 const meow = require('meow');
 const path = require('path');
 const fs = require('fs');
-const ethdeploy = require('../src/index.js');
+const vapdeploy = require('../src/index.js');
 const log = require('../src/utils/index.js').log;
 
 function noop2Callback(v, d, cb) {
@@ -22,12 +22,12 @@ function renameIfExsits(renamePath, renamePathOutput, cb) {
 // handle cli
 const cli = meow(`
     Usage
-      $ ethdeploy <path to config>
+      $ vapdeploy <path to config>
     Options
       --help           the help CLI
       --version, -v    the package verson number
     Example
-      $ ethdeploy ./ethdeploy.config.testnet.js
+      $ vapdeploy ./vapdeploy.config.testnet.js
 `, {
   alias: {},
 });
@@ -38,7 +38,7 @@ if (typeof cli.input[0] === 'undefined') {
   const configPath = path.resolve(cli.input[0]);
   const configObject = require(configPath); // eslint-disable-line
 
-  ethdeploy(configObject, (deployError, deployResult) => {
+  vapdeploy(configObject, (deployError, deployResult) => {
     if (deployError) {
       log('Deployment error', deployError);
       process.exit(1);

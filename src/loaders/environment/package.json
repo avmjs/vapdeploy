@@ -1,20 +1,20 @@
 {
-  "name": "ethdeploy-environment-loader",
+  "name": "vapdeploy-environment-loader",
   "version": "1.0.0",
-  "description": "A solc loader for ethdeploy.",
+  "description": "A solc loader for vapdeploy.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/SilentCicero/ethdeploy.git"
+    "url": "git+ssh://git@github.com/vapjs/vapdeploy.git"
   },
   "keywords": [
     "environment",
     "loader",
-    "ethdeploy",
-    "ethereum",
+    "vapdeploy",
+    "vapory",
     "environment"
   ],
   "dependencies": {
@@ -23,7 +23,7 @@
   "author": "Nick Dodson",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/SilentCicero/ethdeploy-solc-loader/issues"
+    "url": "https://github.com/vapjs/vapdeploy-solc-loader/issues"
   },
-  "homepage": "https://github.com/SilentCicero/ethdeploy-solc-loader#readme"
+  "homepage": "https://github.com/vapjs/vapdeploy-solc-loader#readme"
 }

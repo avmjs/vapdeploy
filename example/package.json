@@ -1,24 +1,24 @@
 {
-  "name": "ethdeploy-example",
+  "name": "vapdeploy-example",
   "version": "1.0.0",
-  "description": "A simple ethdeploy example configuration ",
+  "description": "A simple vapdeploy example configuration ",
   "main": "index.js",
   "scripts": {
-    "deploy": "node ../bin/ethdeploy.js ./ethdeploy.testrpc.config.js",
+    "deploy": "node ../bin/vapdeploy.js ./vapdeploy.testrpc.config.js",
     "start": "npm run deploy && node ./index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "private": true,
   "keywords": [
-    "ethdeploy",
+    "vapdeploy",
     "example"
   ],
   "author": "Nick Dodson",
   "license": "MIT",
   "dependencies": {
-    "ethdeploy-solc-loader": "file:../src/loaders/solc",
-    "ethdeploy-environment-loader": "file:../src/loaders/environment",
-    "ethdeploy": "file:../",
-    "ethereumjs-testrpc": "*"
+    "vapdeploy-solc-loader": "file:../src/loaders/solc",
+    "vapdeploy-environment-loader": "file:../src/loaders/environment",
+    "vapdeploy": "file:../",
+    "vaporyjs-testrpc": "*"
   }
 }

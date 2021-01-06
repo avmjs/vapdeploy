@@ -1,5 +1,5 @@
-const sign = require('ethjs-signer').sign;
-const SignerProvider = require('ethjs-provider-signer');
+const sign = require('vapjs-signer').sign;
+const SignerProvider = require('vapjs-provider-signer');
 
 module.exports = (options) => ({
   entry: [],

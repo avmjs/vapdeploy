@@ -1,5 +1,5 @@
-const sign = require('ethjs-signer').sign;
-const SignerProvider = require('ethjs-provider-signer');
+const sign = require('vapjs-signer').sign;
+const SignerProvider = require('vapjs-provider-signer');
 
 module.exports = (options) => ({
   entry: [
@@ -11,9 +11,6 @@ module.exports = (options) => ({
     filename: 'environments.json',
   },
   module: {
-    loaders: [
-      { test: /\.(json)$/, loader: '../loaders/solc-json.js' },
-    ],
     environment: {
       name: 'ropsten',
       provider: new SignerProvider('http://localhost:8545', {
@@ -28,11 +25,7 @@ module.exports = (options) => ({
       },
     },
     deployment: (deploy, contracts, done) => {
-      deploy(contracts.SimpleStore).then((simpleStoreInstance) => {
-        console.log(simpleStoreInstance); // eslint-disable-line
-
-        done();
-      });
+      done();
     },
   },
   plugins: [

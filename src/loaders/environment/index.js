@@ -1,7 +1,7 @@
 const deepAssign = require('deep-assign');
 
 /**
- * Loads an environments.json file, produced by ethdeploy
+ * Loads an environments.json file, produced by vapdeploy
  *
  * @method loader
  * @param {Object} sourceMap the file source map

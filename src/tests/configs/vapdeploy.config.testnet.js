@@ -1,5 +1,5 @@
-const sign = require('ethjs-signer').sign;
-const SignerProvider = require('ethjs-provider-signer');
+const sign = require('vapjs-signer').sign;
+const SignerProvider = require('vapjs-provider-signer');
 
 module.exports = (options) => ({
   entry: [
@@ -12,6 +12,10 @@ module.exports = (options) => ({
   },
   module: {
     preLoaders: [
+      { test: /\.(json)$/, loader: '../loaders/environment.js', build: true, include: /(environments)/ },
+    ],
+    loaders: [
+      { test: /\.(sol)$/, loader: '../loaders/solc.js', optimize: 1 },
       { test: /\.(json)$/, loader: '../loaders/solc-json.js' },
     ],
     environment: {

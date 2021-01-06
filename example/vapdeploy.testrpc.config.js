@@ -1,10 +1,9 @@
-const TestRPC = require('ethereumjs-testrpc'); // eslint-disable-line
-// const HttpProvider = require('ethjs-provider-http');
+const TestRPC = require('vaporyjs-testrpc'); // eslint-disable-line
 
 module.exports = (options) => ({ // eslint-disable-line
   entry: [
     './environments.json',
-    './src/tests/contracts',
+    './contracts',
   ],
   output: {
     path: './',
@@ -21,18 +20,19 @@ module.exports = (options) => ({ // eslint-disable-line
       },
     },
     preLoaders: [
-      { test: /\.(json)$/, loader: 'ethdeploy-environment-loader', build: true },
+      { test: /\.(json)$/, loader: 'vapdeploy-environment-loader', build: true },
     ],
     loaders: [
-      { test: /\.(sol)$/, exclude: /(test\.)/, loader: 'ethdeploy-solc-loader', optimize: 1 },
+      { test: /\.(sol)$/, loader: 'vapdeploy-solc-loader' },
     ],
     deployment: (deploy, contracts, done) => {
-      deploy(contracts.SimpleStore, { from: 0 }).then(() => {
+      deploy(contracts['contracts/SimpleStore.sol:SimpleStore'], 458977, { from: 0 }).then(() => {
         done();
       });
     },
   },
   plugins: [
-    // new options.plugins.JSONMinifier(),
+    new options.plugins.JSONFilter(),
+    new options.plugins.JSONExpander(),
   ],
 });

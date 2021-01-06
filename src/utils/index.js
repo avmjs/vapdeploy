@@ -1,7 +1,7 @@
 const dir = require('node-dir');
 const fs = require('fs');
 const path = require('path');
-const ethUtil = require('ethjs-util');
+const vapUtil = require('vapjs-util');
 
 /**
  * Returns the ISO current date time.
@@ -14,25 +14,25 @@ function isoTime() {
 }
 
 /**
- * Basic error method for ethdeploy
+ * Basic error method for vapdeploy
  *
  * @method isoTime
  * @param {String} msg the error message
  * @return {Object} Error the new Error object
  */
 function log(...args) {
-  return console.log(`[ethdeploy ${isoTime()}] `, ...args); // eslint-disable-line
+  return console.log(`[vapdeploy ${isoTime()}] `, ...args); // eslint-disable-line
 }
 
 /**
- * Basic error method for ethdeploy
+ * Basic error method for vapdeploy
  *
  * @method isoTime
  * @param {String} msg the error message
  * @return {Object} Error the new Error object
  */
 function error(...args) {
-  return new Error(`[ethdeploy ${isoTime()}] ${args.map((arg) => arg)}`);
+  return new Error(`[vapdeploy ${isoTime()}] ${args.map((arg) => arg)}`);
 }
 
 // recursively converts all BN or BigNumber instances into string
@@ -57,7 +57,7 @@ function bnToString(objInput, baseInput, hexPrefixed) {
       obj = obj.map((item) => bnToString(item, base, hexPrefixed));
     } else {
       if (obj.toString && (obj.lessThan || obj.dividedToIntegerBy || obj.isBN || obj.toTwos)) {
-        return hexPrefixed ? `0x${ethUtil.padToEven(obj.toString(16))}` : obj.toString(base);
+        return hexPrefixed ? `0x${vapUtil.padToEven(obj.toString(16))}` : obj.toString(base);
       } else { // eslint-disable-line
         // recurively converty item
         Object.keys(obj).forEach((key) => {
@@ -126,18 +126,18 @@ function filterSourceMap(testRegex, includeRegex, sourceMap, excludeRegex) {
  * This will wait for a transaction to present a receipt
  *
  * @method getTransactionSuccess
- * @param {Object} eth the eth query instance
+ * @param {Object} vap the vap query instance
  * @param {Object} txHash the transaction hash
  * @param {Object} timeout settings
  * @param {Function} callback the final callback
  * @callback {Object} contractInstance the deployed contract instance with receipt prop
  */
-function getTransactionSuccess(eth, txHash, timeout = 800000, callback) {
+function getTransactionSuccess(vap, txHash, timeout = 800000, callback) {
   const cb = callback || function cb() {};
   let count = 0;
   return new Promise((resolve, reject) => {
     const txInterval = setInterval(() => {
-      eth.getTransactionReceipt(txHash, (err, result) => {
+      vap.getTransactionReceipt(txHash, (err, result) => {
         if (err) {
           clearInterval(txInterval);
           cb(err, null);
@@ -163,18 +163,18 @@ function getTransactionSuccess(eth, txHash, timeout = 800000, callback) {
 }
 
 /**
- * Deploy the contract with eth, factory, and args
+ * Deploy the contract with vap, factory, and args
  *
  * @method deployContract
- * @param {Object} eth the eth query instance
+ * @param {Object} vap the vap query instance
  * @param {Object} factory the contract factory
  * @param {Array} args the contract constructor arguments
  * @param {Function} callback the final callback
  * @callback {Object} contractInstance the deployed contract instance with receipt prop
  */
-function deployContract(eth, factory, args, callback) {
+function deployContract(vap, factory, args, callback) {
   factory.new.apply(factory, args).then((txHash) => {
-    getTransactionSuccess(eth, txHash, 8000000, (receiptError, receipt) => {
+    getTransactionSuccess(vap, txHash, 8000000, (receiptError, receipt) => {
       if (receiptError) {
         callback(receiptError, null);
       }
@@ -248,7 +248,7 @@ function getInputSources(pathname, callback) {
   }
 }
 
-// the base utilty methods for ethdeploy
+// the base utilty methods for vapdeploy
 module.exports = {
   isoTime,
   error,

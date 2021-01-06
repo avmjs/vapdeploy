@@ -1,21 +1,18 @@
-const sign = require('ethjs-signer').sign;
-const SignerProvider = require('ethjs-provider-signer');
+const sign = require('vapjs-signer').sign;
+const SignerProvider = require('vapjs-provider-signer');
 
-module.exports = () => ({
-  entry: {
-    ropsten: {
-      SimpleStore: {
-      },
-    },
-    mainnet: {
-      SomeOtherContract: {
-      },
-    },
+module.exports = (options) => ({
+  entry: 'contracts',
+  output: {
+    path: './',
+    filename: 'environments.json',
   },
-  sourceMapper: (entry, cb) => cb(null, entry),
   module: {
     preLoaders: [
-      { loader: '../loaders/raw-environment.js' },
+      { test: /\.(json)$/, loader: '../loaders/environment.js', build: true, include: /(environments)/ },
+    ],
+    loaders: [
+      { test: /\.(sol)$/, loader: '../loaders/solc.js', optimize: 1 },
     ],
     environment: {
       name: 'ropsten',
@@ -25,6 +22,10 @@ module.exports = () => ({
           cb(null, sign(rawTx, '0x..privateKey...'));
         },
       }),
+      defaultTxObject: {
+        from: 0,
+        gas: 3000000,
+      },
     },
     deployment: (deploy, contracts, done) => {
       deploy(contracts.SimpleStore).then((simpleStoreInstance) => {
@@ -34,4 +35,7 @@ module.exports = () => ({
       });
     },
   },
+  plugins: [
+    new options.plugins.JSONMinifier(),
+  ],
 });

@@ -1,18 +1,18 @@
 const assert = require('chai').assert;
 const BN = require('bn.js'); // eslint-disable-line
 const BigNumber = require('bignumber.js'); // eslint-disable-line
-const ethdeploy = require('../index.js'); // eslint-disable-line
-const HttpProvider = require('ethjs-provider-http'); // eslint-disable-line
-const TestRPC = require('ethereumjs-testrpc');
+const vapdeploy = require('../index.js'); // eslint-disable-line
+const HttpProvider = require('vapjs-provider-http'); // eslint-disable-line
+const TestRPC = require('vaporyjs-testrpc');
 
-describe('ethdeploy', () => {
+describe('vapdeploy', () => {
   describe('main method', () => {
     it('should instantiate properly', () => {
-      assert.equal(typeof ethdeploy, 'function');
+      assert.equal(typeof vapdeploy, 'function');
     });
 
     it('should handle undefined', (done) => {
-      ethdeploy(undefined, (err, result) => {
+      vapdeploy(undefined, (err, result) => {
         assert.isOk(err);
         assert.isNotOk(result);
         done();
@@ -20,7 +20,7 @@ describe('ethdeploy', () => {
     });
 
     it('should handle empty object', (done) => {
-      ethdeploy({}, (err, result) => {
+      vapdeploy({}, (err, result) => {
         assert.isOk(err);
         assert.isNotOk(result);
         done();
@@ -28,7 +28,7 @@ describe('ethdeploy', () => {
     });
 
     it('should handle empty function', (done) => {
-      ethdeploy(() => {}, (err, result) => {
+      vapdeploy(() => {}, (err, result) => {
         assert.isOk(err);
         assert.isNotOk(result);
         done();
@@ -36,7 +36,7 @@ describe('ethdeploy', () => {
     });
 
     it('should handle normal config', (done) => {
-      ethdeploy({
+      vapdeploy({
         entry: [],
         output: {},
         module: {},
@@ -48,7 +48,7 @@ describe('ethdeploy', () => {
     });
 
     it('should handle normal config no provider', (done) => {
-      ethdeploy({
+      vapdeploy({
         entry: [],
         output: {
         },
@@ -63,7 +63,7 @@ describe('ethdeploy', () => {
     });
 
     it('should handle normal config with no env', (done) => {
-      ethdeploy({
+      vapdeploy({
         entry: [],
         output: {
         },
@@ -79,7 +79,7 @@ describe('ethdeploy', () => {
     });
 
     it('should handle normal config with provider', (done) => {
-      ethdeploy({
+      vapdeploy({
         entry: [],
         output: {
         },
@@ -97,7 +97,7 @@ describe('ethdeploy', () => {
     });
 
     it('should handle normal config with testrpc', (done) => {
-      ethdeploy({
+      vapdeploy({
         entry: [],
         output: {},
         module: {
@@ -115,7 +115,7 @@ describe('ethdeploy', () => {
     });
 
     it('should handle normal entry with testrpc', (done) => {
-      ethdeploy({
+      vapdeploy({
         entry: {
           SimpleStore: 1,
         },
@@ -123,7 +123,7 @@ describe('ethdeploy', () => {
         sourceMapper: (v, cb) => cb(null, v),
         module: {
           loaders: [
-            { loader: 'ethdeploy-raw-solc-loader' },
+            { loader: 'vapdeploy-raw-solc-loader' },
           ],
           environment: {
             name: 'localhost',
@@ -139,7 +139,7 @@ describe('ethdeploy', () => {
     });
 
     it('should handle normal entry with testrpc/raw solc', (done) => {
-      ethdeploy({
+      vapdeploy({
         entry: {
           SimpleStore: {
             bytecode: '',
@@ -150,7 +150,7 @@ describe('ethdeploy', () => {
         sourceMapper: (v, cb) => cb(null, v),
         module: {
           loaders: [
-            { loader: 'ethdeploy-raw-solc-loader' },
+            { loader: 'vapdeploy-raw-solc-loader' },
           ],
           environment: {
             name: 'localhost',

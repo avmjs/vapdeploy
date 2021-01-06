@@ -1,4 +1,4 @@
-const TestRPC = require('ethereumjs-testrpc');
+const TestRPC = require('vaporyjs-testrpc');
 
 module.exports = () => ({
   entry: {

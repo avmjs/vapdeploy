@@ -1,29 +1,29 @@
 {
-  "name": "ethdeploy-solc-loader",
+  "name": "vapdeploy-solc-loader",
   "version": "1.0.6",
-  "description": "A solc loader for ethdeploy.",
+  "description": "A solc loader for vapdeploy.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/SilentCicero/ethdeploy.git"
+    "url": "git+ssh://git@github.com/vapjs/vapdeploy.git"
   },
   "keywords": [
     "solc",
     "loader",
-    "ethdeploy",
-    "ethereum",
+    "vapdeploy",
+    "vapory",
     "solidity"
   ],
   "author": "Nick Dodson",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/SilentCicero/ethdeploy-solc-loader/issues"
+    "url": "https://github.com/vapjs/vapdeploy-solc-loader/issues"
   },
   "peerDependencies": {
     "solc": "*"
   },
-  "homepage": "https://github.com/SilentCicero/ethdeploy-solc-loader#readme"
+  "homepage": "https://github.com/vapjs/vapdeploy-solc-loader#readme"
 }

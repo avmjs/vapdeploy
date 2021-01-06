@@ -2,7 +2,7 @@
  * Minifies JSON output
  *
  * @method JSONMinifier
- * @param {String} output the final build file produced by ethdeploy
+ * @param {String} output the final build file produced by vapdeploy
  * @return {String} parsedOutput parsed output
  */
 function JSONMinifier() {
@@ -14,7 +14,7 @@ function JSONMinifier() {
  * Expands JSON output
  *
  * @method JSONMinifier
- * @param {String} output the final build file produced by ethdeploy with indents
+ * @param {String} output the final build file produced by vapdeploy with indents
  * @return {String} parsedOutput parsed output
  */
 function JSONExpander() {
@@ -76,7 +76,7 @@ function IncludeContracts(
  * JSONFilter
  *
  * @method JSONFilter
- * @param {String} output the final build file produced by ethdeploy
+ * @param {String} output the final build file produced by vapdeploy
  * @return {String} parsedOutput parsed output
  */
 function JSONFilter(contractProperties = ['address', 'interface', 'bytecode', 'transactionObject', 'inputs']) {

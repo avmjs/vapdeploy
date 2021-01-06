@@ -1,8 +1,8 @@
 var webpack = require('webpack'); // eslint-disable-line
 
 var env = process.env.NODE_ENV;   // eslint-disable-line
-var filename = 'ethdeploy';      // eslint-disable-line
-var library = 'ethdeploy';          // eslint-disable-line
+var filename = 'vapdeploy';      // eslint-disable-line
+var library = 'vapdeploy';          // eslint-disable-line
 var config = {                    // eslint-disable-line
   entry: [
     './lib/index.js',
